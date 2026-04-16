@@ -6,27 +6,19 @@
   @font-face {
     font-family: 'Poppins';
     src: url('/fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'Poppins';
-    src: url('/fonts/Poppins-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
   }
   @font-face {
     font-family: 'Barlow';
     src: url('/fonts/Barlow-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
   }
-}
+} /* Nah, kurung penutup ini yang tadi hilang */
 
+/* 2. Masukkan ke dalam Theme Tailwind (bersama warna) */
 @theme {
     --font-poppins: 'Poppins', sans-serif;
     --font-barlow: 'Barlow', sans-serif;
     
+    /* Warna Custom dari Modul */
     --color-latar: #f3f4f6;
     --color-teks: #374151; 
     --color-teks-samping: #6b7280;
@@ -37,13 +29,7 @@
     --color-kuning: #f59e0b; 
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* 3. Jadikan Barlow sebagai font default untuk semua teks */
 body {
-    font-family: 'Barlow', sans-serif;
-    background-color: #f3f4f6;
+    @apply font-barlow;
 }

@@ -2,36 +2,54 @@ import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
 
 export default function Dashboard() {
-    const stats = [
-        { id: 1, title: "Total Orders", value: "75", icon: FaShoppingCart, color: "bg-[#00B074]", bgLight: "bg-green-50" },
-        { id: 2, title: "Total Delivered", value: "357", icon: FaTruck, color: "bg-blue-500", bgLight: "bg-blue-50" },
-        { id: 3, title: "Total Canceled", value: "65", icon: FaBan, color: "bg-red-500", bgLight: "bg-red-50" },
-        { id: 4, title: "Total Revenue", value: "$128", icon: FaDollarSign, color: "bg-yellow-500", bgLight: "bg-yellow-50" },
-    ];
-
     return (
-        <div className="p-6">
+        <div id="dashboard-container">
             <PageHeader />
             
-            {/* Stats Cards */}
-            <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {stats.map((stat) => (
-                    <div key={stat.id} className="flex items-center rounded-xl bg-white p-5 shadow-md">
-                        <div className={`${stat.bgLight} mr-4 rounded-full p-3`}>
-                            <stat.icon className={`text-2xl ${stat.color.replace('bg', 'text')}`} />
-                        </div>
-                        <div>
-                            <p className="text-sm text-gray-500">{stat.title}</p>
-                            <p className="text-2xl font-bold text-gray-800">{stat.value}</p>
-                        </div>
+            <div id="dashboard-grid" className="p-5 grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+                {/* Orders Card */}
+                <div id="dashboard-orders" className="flex items-center space-x-5 bg-white rounded-xl shadow-sm p-6">
+                    <div id="orders-icon" className="bg-hijau rounded-full p-4">
+                        <FaShoppingCart className="text-3xl text-white" />
                     </div>
-                ))}
-            </div>
+                    <div id="orders-info" className="flex flex-col">
+                        <span id="orders-count" className="text-3xl font-bold text-gray-800">75</span>
+                        <span id="orders-text" className="text-gray-400 text-sm">Total Orders</span>
+                    </div>
+                </div>
 
-            {/* Placeholder untuk konten lain */}
-            <div className="rounded-xl bg-white p-6 shadow-md">
-                <h3 className="mb-4 text-lg font-semibold text-gray-800">Recent Activity</h3>
-                <p className="text-gray-500">No recent activity to display.</p>
+                {/* Delivered Card */}
+                <div id="dashboard-delivered" className="flex items-center space-x-5 bg-white rounded-xl shadow-sm p-6">
+                    <div id="delivered-icon" className="bg-blue-500 rounded-full p-4">
+                        <FaTruck className="text-3xl text-white" />
+                    </div>
+                    <div id="delivered-info" className="flex flex-col">
+                        <span id="delivered-count" className="text-3xl font-bold text-gray-800">357</span>
+                        <span id="delivered-text" className="text-gray-400 text-sm">Total Delivered</span>
+                    </div>
+                </div>
+
+                {/* Canceled Card */}
+                <div id="dashboard-canceled" className="flex items-center space-x-5 bg-white rounded-xl shadow-sm p-6">
+                    <div id="canceled-icon" className="bg-red-500 rounded-full p-4">
+                        <FaBan className="text-3xl text-white" />
+                    </div>
+                    <div id="canceled-info" className="flex flex-col">
+                        <span id="canceled-count" className="text-3xl font-bold text-gray-800">65</span>
+                        <span id="canceled-text" className="text-gray-400 text-sm">Total Canceled</span>
+                    </div>
+                </div>
+
+                {/* Revenue Card */}
+                <div id="dashboard-revenue" className="flex items-center space-x-5 bg-white rounded-xl shadow-sm p-6">
+                    <div id="revenue-icon" className="bg-green-500 rounded-full p-4">
+                        <FaDollarSign className="text-3xl text-white" />
+                    </div>
+                    <div id="revenue-info" className="flex flex-col">
+                        <span id="revenue-amount" className="text-3xl font-bold text-gray-800">$128</span>
+                        <span id="revenue-text" className="text-gray-400 text-sm">Total Revenue</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

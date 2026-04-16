@@ -1,54 +1,48 @@
-import { FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
-import { MdOutlineAreaChart } from "react-icons/md";
+import { FaBell, FaSearch } from "react-icons/fa";
+import { FcAreaChart } from "react-icons/fc";
+import { SlSettings } from "react-icons/sl";
 
 export default function Header() {
     return (
-        <header className="ml-80 flex items-center justify-between bg-white p-4 shadow-sm">
+        <div id="header-container" className="flex justify-between items-center p-4">
             {/* Search Bar */}
-            <div className="relative w-96">
+            <div id="search-bar" className="relative w-full max-w-lg">
                 <input
+                    id="search-input"
                     type="text"
-                    placeholder="Search here..."
-                    className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2 pl-4 pr-10 text-sm outline-none focus:border-[#00B074] focus:ring-1 focus:ring-[#00B074]"
+                    placeholder="Search Here..."
+                    className="border border-gray-100 p-2 pr-10 bg-white w-full max-w-lg rounded-md outline-none"
                 />
-                <FaSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <FaSearch id="search-icon" className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300" />
             </div>
 
-            {/* Right Icons */}
-            <div className="flex items-center space-x-4">
-                {/* Notification */}
-                <div className="relative cursor-pointer rounded-xl bg-blue-50 p-2 text-blue-500">
-                    <FaBell className="text-lg" />
-                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-xs text-white">3</span>
+            {/* Icon & Profile Section */}
+            <div id="icons-container" className="flex items-center space-x-4">
+                {/* Icons */}
+                <div id="notification-icon" className="relative p-3 bg-blue-100 rounded-2xl text-blue-500 cursor-pointer">
+                    <FaBell />
+                    <span id="notification-badge" className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-200 rounded-full px-2 py-1 text-xs">50</span>
                 </div>
-
-                {/* Chart Icon */}
-                <div className="cursor-pointer rounded-xl bg-green-50 p-2 text-green-500">
-                    <MdOutlineAreaChart className="text-lg" />
+                <div id="chart-icon" className="p-3 bg-blue-100 rounded-2xl cursor-pointer">
+                    <FcAreaChart />
                 </div>
-
-                {/* Settings */}
-                <div className="cursor-pointer rounded-xl bg-red-50 p-2 text-red-500">
-                    <IoMdSettings className="text-lg" />
+                <div id="settings-icon" className="p-3 bg-red-100 rounded-2xl text-red-500 cursor-pointer">
+                    <SlSettings />
                 </div>
-
-                {/* Divider */}
-                <div className="h-8 w-px bg-gray-200"></div>
-
-                {/* Profile */}
-                <div className="flex cursor-pointer items-center space-x-3">
-                    <div className="text-right">
-                        <p className="text-sm text-gray-600">Hello,</p>
-                        <p className="font-semibold text-gray-800">Samantha</p>
-                    </div>
+             
+                {/* Profile Section */}
+                <div id="profile-container" className="flex items-center space-x-4 border-l pl-4 border-gray-300">
+                    <span id="profile-text" className="text-sm">
+                        Hello, <b>Samantha</b>
+                    </span>
                     <img
+                        id="profile-avatar"
                         src="https://avatar.iran.liara.run/public/28"
+                        className="w-10 h-10 rounded-full"
                         alt="Profile"
-                        className="h-10 w-10 rounded-full object-cover"
                     />
                 </div>
             </div>
-        </header>
+        </div>
     );
 }
