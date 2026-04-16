@@ -1,12 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+@font-face {
+    font-family: 'Barlow';
+    src: url('/fonts/Barlow-Regular.ttf') ;
+}
 
-@layer base {
-  body {
-    font-family: 'Barlow', sans-serif;
-    background-color: #f3f4f6;
-  }
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf') ;
+}
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --font-barlow: "Barlow", sans-serif;
+
+  --color-latar: #f3f4f6;
+  --color-teks: #374151; 
+  --color-teks-samping: #6b7280;
+  --color-garis: #e5e7eb; 
+  --color-hijau: #00B074; 
+  --color-merah: #ef4444; 
+  --color-biru: #3b82f6;
+  --color-kuning: #f59e0b; 
+}
+
+body {
+    @apply font-barlow bg-gray-100;
 }

@@ -1,40 +1,75 @@
-import { FaHome, FaListAlt, FaUser, FaPlus } from "react-icons/fa";
+import { LuLayoutDashboard, LuListOrdered, LuUsers, LuPlus } from "react-icons/lu";
+import { useState } from "react";
 
 export default function Sidebar() {
+    // IMPROVISASI: Active Menu State
+    const [activeMenu, setActiveMenu] = useState("Dashboard");
+
+    const menuItems = [
+        { id: "Dashboard", icon: LuLayoutDashboard, label: "Dashboard" },
+        { id: "Orders", icon: LuListOrdered, label: "Orders" },
+        { id: "Customers", icon: LuUsers, label: "Customers" },
+    ];
+
     return (
-        <div className="fixed left-0 top-0 h-screen w-64 bg-white shadow-lg p-5 flex flex-col">
-            {/* LOGO */}
-            <div className="border-b border-gray-100 pb-4 mb-6">
-                <h1 className="text-3xl font-bold text-gray-800">
-                    Sedap<span className="text-hijau">.</span>
-                </h1>
-                <p className="text-xs text-gray-400 mt-1">Modern Admin Dashboard</p>
+        <div id="sidebar" className="flex min-h-screen w-90 flex-col bg-white p-10 shadow-lg">
+            {/* Logo */}
+            <div id="sidebar-logo" className="flex flex-col">
+                <span id="logo-title" className="font-poppins text-[48px] text-gray-900 leading-tight">
+                    Sedap <b id="logo-dot" className="text-hijau">.</b>
+                </span>
+                <span id="logo-subtitle" className="font-semibold text-gray-400">Modern Admin Dashboard</span>
             </div>
 
-            {/* MENU NAVIGASI */}
-            <nav className="flex-1">
-                <ul className="space-y-2">
-                    <li className="bg-hijau text-white rounded-lg p-3 flex items-center gap-3 cursor-pointer">
-                        <FaHome /> <span>Dashboard</span>
-                    </li>
-                    <li className="text-gray-600 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-100">
-                        <FaListAlt /> <span>Order List</span>
-                    </li>
-                    <li className="text-gray-600 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-100">
-                        <FaUser /> <span>Customer</span>
-                    </li>
+            {/* List Menu */}
+            <div id="sidebar-menu" className="mt-10">
+                <ul id="menu-list" className="space-y-3">
+                    {menuItems.map((item) => (
+                        <li key={item.id}>
+                            <div 
+                                id={`menu-${item.id.toLowerCase()}`} 
+                                className={`flex cursor-pointer items-center rounded-xl p-4 font-medium transition-all ${
+                                    activeMenu === item.label
+                                        ? 'bg-hijau text-white shadow-md'
+                                        : 'text-gray-600 hover:text-hijau hover:bg-green-200 hover:font-extrabold'
+                                }`}
+                                onClick={() => setActiveMenu(item.label)}
+                            >
+                                <item.icon className={`mr-4 text-xl ${activeMenu === item.label ? 'text-white' : ''}`} /> 
+                                {item.label}
+                            </div>
+                        </li>
+                    ))}
                 </ul>
-            </nav>
+            </div>
 
-            {/* FOOTER CARD */}
-            <div className="mt-auto">
-                <div className="bg-hijau rounded-lg p-3 text-white text-center mb-3">
-                    <p className="text-xs mb-2">Please organize your menus through button below!</p>
-                    <div className="bg-white text-hijau rounded-lg p-2 flex items-center justify-center gap-2 cursor-pointer">
-                        <FaPlus /> <span className="text-sm">Add Menus</span>
+            {/* 3. FOOTER SECTION (Kembali utuh seperti aslinya + sedikit perbaikan posisi) */}
+            <div id="sidebar-footer" className="mt-auto">
+                <div id="footer-card" className="bg-hijau px-4 py-6 rounded-3xl shadow-lg mb-10 flex items-center relative overflow-hidden">
+                    <div id="footer-text" className="text-white text-sm z-10 w-2/3">
+                        <p className="mb-3 leading-tight">Please organize your menus through button below!</p>
+                        <div id="add-menu-button" className="flex justify-center items-center p-2 bg-white rounded-md space-x-2 cursor-pointer active:scale-95 transition-transform shadow-sm">
+                            <span className="text-gray-600 font-bold flex items-center text-xs">
+                                <LuPlus className="mr-1" /> Add Menus
+                            </span>
+                        </div>
                     </div>
+                    {/* Foto Profil disesuaikan posisinya agar rapi */}
+                    <img 
+                        className="w-16 h-16 rounded-full object-cover border-2 border-white/50 ml-auto shadow-md" 
+                        src="/img/foto.png" 
+                        alt="avatar" 
+                    />
                 </div>
-                <p className="text-xs text-center text-gray-400">© 2025 Sedap Admin</p>
+                
+                <div className="flex flex-col">
+                    <span id="footer-brand" className="font-bold text-gray-800 text-sm italic">
+                        Sedap Restaurant Admin Dashboard
+                    </span>
+                    <p id="footer-copyright" className="font-light text-gray-400 text-[10px] tracking-wide">
+                        © 2026 All Right Reserved
+                    </p>
+                </div>
             </div>
         </div>
     );
