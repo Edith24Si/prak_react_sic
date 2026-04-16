@@ -1,22 +1,55 @@
+import { useState } from "react";
+
 export default function PageHeader() {
+    // State untuk dropdown filter (IMPROVISASI 3)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedFilter, setSelectedFilter] = useState("Hari Ini");
+
+    const filters = ["Hari Ini", "Minggu Ini", "Bulan Ini", "Tahun Ini"];
+
     return (
-        <div id="pageheader-container" className="flex items-center justify-between p-4">
-            <div id="pageheader-left" className="flex flex-col">
-                <span id="page-title" className="text-3xl font-bold text-gray-800">
-                    Dashboard
-                </span>
-                <div id="breadcrumb-links" className="flex items-center font-medium space-x-2 mt-2">
-                    <span id="breadcrumb-home" className="text-gray-400 text-sm">Hi, Samantha. Welcome back to Sedap Admin!</span>
-                </div>
+        <div className="flex justify-between items-center mb-6">
+            {/* Bagian Kiri - Title */}
+            <div>
+                <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
+                <p className="text-sm text-gray-500 mt-1">
+                    Hi, Samantha. Welcome back to Sedap Admin!
+                </p>
             </div>
-            <div id="action-button">
-                <button id="add-button" className="bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg shadow-sm flex items-center space-x-2">
+
+            {/* Bagian Kanan - Filter Dropdown (IMPROVISASI 3) */}
+            <div className="relative">
+                <button
+                    className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2 shadow-sm hover:bg-gray-50"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
                     <span className="bg-blue-100 text-blue-500 p-1 rounded-md">📅</span>
-                    <div className="flex flex-col text-left text-xs">
-                        <b className="text-gray-800 text-sm">Filter Periode</b>
-                        <span>17 April 2020 - 21 May 2020</span>
+                    <div className="text-left">
+                        <p className="text-xs font-semibold text-gray-800">Filter Periode</p>
+                        <p className="text-xs text-gray-500">{selectedFilter}</p>
                     </div>
+                    <span className="text-gray-400">▼</span>
                 </button>
+
+                {/* Dropdown Menu */}
+                {isDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                        {filters.map((filter) => (
+                            <button
+                                key={filter}
+                                className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
+                                    selectedFilter === filter ? 'bg-hijau text-white' : 'text-gray-700'
+                                }`}
+                                onClick={() => {
+                                    setSelectedFilter(filter);
+                                    setIsDropdownOpen(false);
+                                }}
+                            >
+                                {filter}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

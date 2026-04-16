@@ -2,50 +2,39 @@ import { FaHome, FaListAlt, FaUser, FaPlus } from "react-icons/fa";
 
 export default function Sidebar() {
     return (
-        <div id="sidebar">
-            {/* Logo */}
-            <div id="sidebar-logo">
-                <span id="logo-title">
-                    Sedap <b id="logo-dot">.</b>
-                </span>
-                <span id="logo-subtitle">Modern Admin Dashboard</span>
+        <div className="fixed left-0 top-0 h-screen w-64 bg-white shadow-lg p-5 flex flex-col">
+            {/* LOGO */}
+            <div className="border-b border-gray-100 pb-4 mb-6">
+                <h1 className="text-3xl font-bold text-gray-800">
+                    Sedap<span className="text-hijau">.</span>
+                </h1>
+                <p className="text-xs text-gray-400 mt-1">Modern Admin Dashboard</p>
             </div>
 
-            {/* List Menu */}
-            <div id="sidebar-menu">
-                <ul id="menu-list">
-                    <li>
-                        <div id="menu-1">
-                            <FaHome className="mr-4 text-xl" /> Dashboard
-                        </div>
+            {/* MENU NAVIGASI */}
+            <nav className="flex-1">
+                <ul className="space-y-2">
+                    <li className="bg-hijau text-white rounded-lg p-3 flex items-center gap-3 cursor-pointer">
+                        <FaHome /> <span>Dashboard</span>
                     </li>
-                    <li>
-                        <div id="menu-2">
-                            <FaListAlt className="mr-4 text-xl" /> Order List
-                        </div>
+                    <li className="text-gray-600 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-100">
+                        <FaListAlt /> <span>Order List</span>
                     </li>
-                    <li>
-                        <div id="menu-3">
-                            <FaUser className="mr-4 text-xl" /> Customer
-                        </div>
+                    <li className="text-gray-600 rounded-lg p-3 flex items-center gap-3 cursor-pointer hover:bg-gray-100">
+                        <FaUser /> <span>Customer</span>
                     </li>
                 </ul>
-            </div>
+            </nav>
 
-            {/* Footer */}
-            <div id="sidebar-footer">
-                <div id="footer-card">
-                    <div id="footer-text">
-                        <span>Please organize your menus through button below!</span>
-                        <div id="add-menu-button">
-                            <FaPlus />
-                            <span>Add Menus</span>
-                        </div>
+            {/* FOOTER CARD */}
+            <div className="mt-auto">
+                <div className="bg-hijau rounded-lg p-3 text-white text-center mb-3">
+                    <p className="text-xs mb-2">Please organize your menus through button below!</p>
+                    <div className="bg-white text-hijau rounded-lg p-2 flex items-center justify-center gap-2 cursor-pointer">
+                        <FaPlus /> <span className="text-sm">Add Menus</span>
                     </div>
-                    <img id="footer-avatar" src="https://avatar.iran.liara.run/public/28" alt="avatar" />
                 </div>
-                <span id="footer-brand">Sedap Restaurant Admin Dashboard</span>
-                <p id="footer-copyright">&copy; 2025 All Right Reserved</p>
+                <p className="text-xs text-center text-gray-400">© 2025 Sedap Admin</p>
             </div>
         </div>
     );

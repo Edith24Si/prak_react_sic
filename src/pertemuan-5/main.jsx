@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom/client'
 import Sidebar from './layouts/Sidebar'
 import Header from './layouts/Header'
 import Dashboard from './pages/Dashboard'
-import './assets/tailwind.css' 
+import './assets/tailwind.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <div id="app-container" className="bg-gray-100 min-h-screen flex font-barlow">
-        <div id="layout-wrapper" className="flex flex-row flex-1">
+function App() {
+    return (
+        <div className="min-h-screen bg-latar">
             <Sidebar />
-            <div id="main-content" className="flex-1 p-4 flex flex-col">
-                  <Header />
-                  <Dashboard />
+            <div className="ml-64">
+                <Header />
+                <main className="p-6">
+                    <Dashboard />
+                </main>
             </div>
         </div>
-    </div>
-  </React.StrictMode>,
-)
+    )
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)

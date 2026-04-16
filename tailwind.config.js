@@ -12,7 +12,8 @@ export default {
       },
       colors: {
         'hijau': '#00B074',
-      },
+        'latar': '#f3f4f6',
+      }
     },
   },
   plugins: [],
