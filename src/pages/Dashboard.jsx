@@ -20,8 +20,15 @@ export default function Dashboard() {
 
     return (
         <div>
-            <PageHeader />
-
+        <div>
+            {/* Dashboard mungkin tidak butuh tombol tambah */}
+            <PageHeader 
+                title="Dashboard" 
+                breadcrumbs={['Home', 'Dashboard Detail']} 
+            />
+            
+            {/* Konten dashboard di bawah sini */}
+        </div>
             {/* 4 Card Statistik */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
                 {stats.map((stat) => (

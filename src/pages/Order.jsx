@@ -17,12 +17,21 @@ export default function Orders() {
         { id: 3, customer: "Agus Wijaya", item: "Sate Ayam", amount: "Rp 65.000", status: "Delivered", statusColor: "bg-green-100 text-green-600" },
         { id: 4, customer: "Dewi Lestari", item: "Es Teh Manis", amount: "Rp 8.000", status: "Pending", statusColor: "bg-yellow-100 text-yellow-600" },
     ];
+    const handleAddOrder = () => {
+        alert("Buka popup tambah order!");
+    };
 
     return (
         <div>
-            <PageHeader />
-            <p> Ini Halaman Orders</p>
-
+            {/* Halaman Order butuh tombol tambah */}
+            <PageHeader 
+                title="Order List" 
+                breadcrumbs={['Home', 'Orders', 'Order List']} 
+                buttonText="+ Add Order"
+                onButtonClick={handleAddOrder}
+            />
+            
+            {/* Tabel Order di bawah sini */}
         </div>
     );
 }
