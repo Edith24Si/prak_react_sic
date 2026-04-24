@@ -1,76 +1,77 @@
-import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
+import React, { useState } from "react";
 import PageHeader from "../components/PageHeader";
+import { customersData } from "../data/DataDummy";
 
 export default function Customers() {
-    // Data untuk card statistik
-    const stats = [
-        { id: 1, title: "Total Orders", value: "75", icon: FaShoppingCart, color: "bg-hijau", iconColor: "text-white" },
-        { id: 2, title: "Total Delivered", value: "357", icon: FaTruck, color: "bg-blue-500", iconColor: "text-white" },
-        { id: 3, title: "Total Canceled", value: "65", icon: FaBan, color: "bg-red-500", iconColor: "text-white" },
-        { id: 4, title: "Total Revenue", value: "$128", icon: FaDollarSign, color: "bg-yellow-500", iconColor: "text-white" },
-    ];
-
-    // Data Recent Orders
-    const recentOrders = [
-        { id: 1, customer: "Budi Santoso", item: "Nasi Goreng", amount: "Rp 45.000", status: "Delivered", statusColor: "bg-green-100 text-green-600" },
-        { id: 2, customer: "Siti Aminah", item: "Mie Ayam", amount: "Rp 35.000", status: "Processing", statusColor: "bg-blue-100 text-blue-600" },
-        { id: 3, customer: "Agus Wijaya", item: "Sate Ayam", amount: "Rp 65.000", status: "Delivered", statusColor: "bg-green-100 text-green-600" },
-        { id: 4, customer: "Dewi Lestari", item: "Es Teh Manis", amount: "Rp 8.000", status: "Pending", statusColor: "bg-yellow-100 text-yellow-600" },
-    ];
+    const [showForm, setShowForm] = useState(false);
 
     return (
         <div className="flex flex-col gap-6 pb-8">
-            
-            {/* 1. PAGE HEADER DINAMIS */}
             <PageHeader 
-                title="Customers Overview" 
-                breadcrumbs={["Dashboard", "Customers"]} 
-                buttonText="+ Add New Customer"
-                onButtonClick={() => alert("Fitur tambah kustomer belum aktif!")}
-            />
+                title="Customers" 
+                breadcrumb={["Dashboard", "Customers"]}
+            >
+            
+                {/* Tombol Add Customer dikirim sebagai children */}
+                <button 
+                    onClick={() => setShowForm(!showForm)}
+                    className="bg-hijau text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity shadow-sm font-semibold"
+                >
+                    {showForm ? "Cancel" : "+ Add Customer"}
+                </button>
+            </PageHeader>
 
-            {/* 2. SECTION STATISTIK (Grid 4 Kolom) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-                {stats.map((stat) => (
-                    <div key={stat.id} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-5 transition-transform hover:-translate-y-1">
-                        <div className={`w-14 h-14 rounded-full flex items-center justify-center shadow-inner ${stat.color} ${stat.iconColor}`}>
-                            <stat.icon size={22} />
+            {/* FORM ADD CUSTOMER */}
+            {showForm && (
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mx-4">
+                    <h2 className="text-lg font-bold text-gray-800 mb-4">Add New Customer</h2>
+                    <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Customer ID" className="border border-gray-300 p-2 rounded-lg w-full outline-none focus:border-hijau" />
+                        <input type="text" placeholder="Customer Name" className="border border-gray-300 p-2 rounded-lg w-full outline-none focus:border-hijau" />
+                        <input type="email" placeholder="Email" className="border border-gray-300 p-2 rounded-lg w-full outline-none focus:border-hijau" />
+                        <input type="text" placeholder="Phone" className="border border-gray-300 p-2 rounded-lg w-full outline-none focus:border-hijau" />
+                        <select className="border border-gray-300 p-2 rounded-lg w-full outline-none focus:border-hijau">
+                            <option value="">Select Loyalty</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Gold">Gold</option>
+                        </select>
+                        <div className="md:col-span-2 flex justify-end mt-2">
+                            <button type="button" className="bg-hijau text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                                Save Customer
+                            </button>
                         </div>
-                        <div>
-                            <h3 className="text-gray-500 text-sm font-medium mb-1">{stat.title}</h3>
-                            <p className="text-2xl font-bold text-gray-800">{stat.value}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                    </form>
+                </div>
+            )}
 
-            {/* 3. SECTION RECENT ORDERS (Tabel) */}
+            {/* TABEL DATA CUSTOMER (30 Data) */}
             <div className="px-4 mt-2">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="p-6 border-b border-gray-100 flex justify-between items-center">
-                        <h2 className="text-lg font-bold text-gray-800">Recent Customer Orders</h2>
-                        <button className="text-sm text-hijau font-semibold hover:underline">View All</button>
-                    </div>
-                    
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
-                            <thead className="bg-gray-50/50 text-gray-500 text-sm">
+                            <thead className="bg-gray-50 text-gray-500 text-sm">
                                 <tr>
-                                    <th className="px-6 py-4 font-medium">Customer Name</th>
-                                    <th className="px-6 py-4 font-medium">Item Ordered</th>
-                                    <th className="px-6 py-4 font-medium">Amount</th>
-                                    <th className="px-6 py-4 font-medium">Status</th>
+                                    <th className="px-6 py-4 font-semibold">Customer ID</th>
+                                    <th className="px-6 py-4 font-semibold">Name</th>
+                                    <th className="px-6 py-4 font-semibold">Email</th>
+                                    <th className="px-6 py-4 font-semibold">Phone</th>
+                                    <th className="px-6 py-4 font-semibold">Loyalty</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
-                                {recentOrders.map((order) => (
-                                    <tr key={order.id} className="hover:bg-gray-50/50 transition-colors">
-                                        <td className="px-6 py-4 font-semibold text-gray-800">{order.customer}</td>
-                                        <td className="px-6 py-4 text-gray-600">{order.item}</td>
-                                        <td className="px-6 py-4 font-medium text-gray-800">{order.amount}</td>
+                                {customersData.map((cust) => (
+                                    <tr key={cust.id} className="hover:bg-gray-50 transition-colors">
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-700">{cust.id}</td>
+                                        <td className="px-6 py-4 font-semibold text-gray-800">{cust.name}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-600">{cust.email}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-600">{cust.phone}</td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide ${order.statusColor}`}>
-                                                {order.status}
+                                            <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide 
+                                                ${cust.loyalty === 'Gold' ? 'bg-yellow-100 text-yellow-600' : 
+                                                  cust.loyalty === 'Silver' ? 'bg-gray-200 text-gray-600' : 
+                                                  'bg-orange-100 text-orange-600'}`}>
+                                                {cust.loyalty}
                                             </span>
                                         </td>
                                     </tr>
@@ -80,7 +81,6 @@ export default function Customers() {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
