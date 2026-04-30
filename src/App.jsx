@@ -1,55 +1,47 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./assets/tailwind.css";
-import Sidebar from "./layouts/Sidebar";
-import Header from "./layouts/Header";
-import Dashboard from "./pages/Dashboard";
-import Orders from "./pages/Order";
-import Customers from "./pages/Customers";
-import NotFound from "./pages/NotFound"; // Komponen NotFound dinamis kita
 import { Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import AuthLayout from "./layouts/AuthLayout";
+import Loading from "./components/Loading";
+
+// Lazy load semua halaman
+const Dashboard = React.lazy(() => import("./pages/Dashboard"));
+const Orders     = React.lazy(() => import("./pages/Order"));
+const Customers  = React.lazy(() => import("./pages/Customers"));
+const NotFound   = React.lazy(() => import("./pages/NotFound"));
+const Login      = React.lazy(() => import("./pages/auth/Login"));
+const Register   = React.lazy(() => import("./pages/auth/Register"));
+const Forgot     = React.lazy(() => import("./pages/auth/Forgot"));
 
 function App() {
-  return (
-    <div id="app-container" className="bg-gray-100 min-h-screen flex w-full">
-      <div id="layout-wrapper" className="flex flex-row flex-1">
+    return (
+        <Suspense fallback={<Loading />}>
+            <Routes>
 
-        {/* Sidebar tetap muncul di semua halaman */}
-        <Sidebar />
+                {/* Halaman yang pakai Sidebar + Header */}
+                <Route element={<MainLayout />}>
+                    <Route path="/"          element={<Dashboard />} />
+                    <Route path="/orders"    element={<Orders />} />
+                    <Route path="/customers" element={<Customers />} />
+                    <Route path="/error/400" element={<NotFound errorCode="400" errorTitle="Bad Request"  errorDescription="Server tidak dapat memahami permintaan Anda." />} />
+                    <Route path="/error/401" element={<NotFound errorCode="401" errorTitle="Unauthorized" errorDescription="Anda harus login terlebih dahulu." />} />
+                    <Route path="/error/403" element={<NotFound errorCode="403" errorTitle="Forbidden"    errorDescription="Anda tidak memiliki izin untuk mengakses fitur ini." />} />
+                </Route>
 
-        <div id="main-content" className="flex-1 p-4 overflow-y-auto">
-          {/* Header tetap muncul di atas konten */}
-          <Header />
+                {/* Halaman yang pakai card putih (tanpa Sidebar) */}
+                <Route element={<AuthLayout />}>
+                    <Route path="/login"    element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot"   element={<Forgot />} />
+                </Route>
 
-          {/* Pengaturan Navigasi Halaman */}
-          <Routes>
-            {/* Halaman Utama */}
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/customers" element={<Customers />} />
-            <Route path="/error/400" element={<NotFound errorCode="400" errorTitle="Bad Request" errorDescription="Permintaan kamu tidak bisa diproses." />} />
-            <Route path="/error/401" element={<NotFound errorCode="401" errorTitle="Unauthorized" errorDescription="Kamu harus login terlebih dahulu." />} />
+                {/* 404 */}
+                <Route path="*" element={<NotFound />} />
 
-            {/* Poin 4: Route Khusus Simulasi Error */}
-            <Route
-              path="/error/400"
-              element={<NotFound errorCode="400" errorTitle="Bad Request" errorDescription="Server tidak dapat memahami permintaan Anda karena sintaks yang salah." />}
-            />
-            <Route
-              path="/error/401"
-              element={<NotFound errorCode="401" errorTitle="Unauthorized" errorDescription="Maaf, Anda harus login terlebih dahulu untuk melihat data ini." />}
-            />
-            <Route
-              path="/error/403"
-              element={<NotFound errorCode="403" errorTitle="Forbidden" errorDescription="Anda tidak memiliki izin (permission) untuk mengakses fitur ini." />}
-            />
-
-            {/* Default Route untuk Halaman Tidak Ditemukan (404) */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
-  );
+            </Routes>
+        </Suspense>
+    );
 }
 
 export default App;
