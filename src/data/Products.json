@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "title": "Laptop Gaming Nitro 5",
+    "code": "PRD001",
+    "category": "Elektronik",
+    "brand": "Acer",
+    "price": 14500000,
+    "stock": 12
+  },
+  {
+    "id": 2,
+    "title": "Smartphone Galaxy A55",
+    "code": "PRD002",
+    "category": "Elektronik",
+    "brand": "Samsung",
+    "price": 6200000,
+    "stock": 25
+  },
+  {
+    "id": 3,
+    "title": "Headset Wireless WH-1000XM5",
+    "code": "PRD003",
+    "category": "Audio",
+    "brand": "Sony",
+    "price": 5500000,
+    "stock": 18
+  },
+  {
+    "id": 4,
+    "title": "Mouse Gaming G Pro X",
+    "code": "PRD004",
+    "category": "Aksesoris Komputer",
+    "brand": "Logitech",
+    "price": 1800000,
+    "stock": 30
+  },
+  {
+    "id": 5,
+    "title": "Keyboard Mechanical K617",
+    "code": "PRD005",
+    "category": "Aksesoris Komputer",
+    "brand": "Redragon",
+    "price": 750000,
+    "stock": 20
+  },
+  {
+    "id": 6,
+    "title": "Monitor UltraWide 29 Inch",
+    "code": "PRD006",
+    "category": "Elektronik",
+    "brand": "LG",
+    "price": 3900000,
+    "stock": 10
+  },
+  {
+    "id": 7,
+    "title": "Smart TV 50 Inch 4K",
+    "code": "PRD007",
+    "category": "Elektronik",
+    "brand": "Xiaomi",
+    "price": 6700000,
+    "stock": 8
+  },
+  {
+    "id": 8,
+    "title": "Power Bank 20000mAh",
+    "code": "PRD008",
+    "category": "Gadget",
+    "brand": "Anker",
+    "price": 650000,
+    "stock": 40
+  },
+  {
+    "id": 9,
+    "title": "Kamera Mirrorless EOS R50",
+    "code": "PRD009",
+    "category": "Kamera",
+    "brand": "Canon",
+    "price": 12500000,
+    "stock": 6
+  },
+  {
+    "id": 10,
+    "title": "Printer EcoTank L3250",
+    "code": "PRD010",
+    "category": "Perangkat Kantor",
+    "brand": "Epson",
+    "price": 3200000,
+    "stock": 15
+  },
+  {
+    "id": 11,
+    "title": "Jam Tangan Smartwatch GT4",
+    "code": "PRD011",
+    "category": "Wearable",
+    "brand": "Huawei",
+    "price": 2800000,
+    "stock": 22
+  },
+  {
+    "id": 12,
+    "title": "Speaker Bluetooth Flip 6",
+    "code": "PRD012",
+    "category": "Audio",
+    "brand": "JBL",
+    "price": 2100000,
+    "stock": 14
+  },
+  {
+    "id": 13,
+    "title": "SSD NVMe 1TB",
+    "code": "PRD013",
+    "category": "Komponen Komputer",
+    "brand": "Kingston",
+    "price": 1450000,
+    "stock": 35
+  },
+  {
+    "id": 14,
+    "title": "RAM DDR4 16GB",
+    "code": "PRD014",
+    "category": "Komponen Komputer",
+    "brand": "Corsair",
+    "price": 980000,
+    "stock": 28
+  },
+  {
+    "id": 15,
+    "title": "Router WiFi 6 Archer AX23",
+    "code": "PRD015",
+    "category": "Networking",
+    "brand": "TP-Link",
+    "price": 1200000,
+    "stock": 17
+  },
+  {
+    "id": 16,
+    "title": "Vacuum Cleaner Robot",
+    "code": "PRD016",
+    "category": "Peralatan Rumah",
+    "brand": "Roborock",
+    "price": 4500000,
+    "stock": 9
+  },
+  {
+    "id": 17,
+    "title": "Air Fryer Digital 5L",
+    "code": "PRD017",
+    "category": "Peralatan Dapur",
+    "brand": "Philips",
+    "price": 1700000,
+    "stock": 13
+  },
+  {
+    "id": 18,
+    "title": "Blender Portable USB",
+    "code": "PRD018",
+    "category": "Peralatan Dapur",
+    "brand": "Mito",
+    "price": 350000,
+    "stock": 26
+  },
+  {
+    "id": 19,
+    "title": "Sepatu Running Ultraboost",
+    "code": "PRD019",
+    "category": "Fashion",
+    "brand": "Adidas",
+    "price": 2900000,
+    "stock": 16
+  },
+  {
+    "id": 20,
+    "title": "Tas Ransel Laptop 15 Inch",
+    "code": "PRD020",
+    "category": "Fashion",
+    "brand": "Eiger",
+    "price": 550000,
+    "stock": 21
+  },
+  {
+    "id": 21,
+    "title": "Kaos Polos Premium",
+    "code": "PRD021",
+    "category": "Fashion",
+    "brand": "Uniqlo",
+    "price": 129000,
+    "stock": 50
+  },
+  {
+    "id": 22,
+    "title": "Celana Jeans Slim Fit",
+    "code": "PRD022",
+    "category": "Fashion",
+    "brand": "Levis",
+    "price": 799000,
+    "stock": 19
+  },
+  {
+    "id": 23,
+    "title": "Botol Minum Stainless 1L",
+    "code": "PRD023",
+    "category": "Olahraga",
+    "brand": "Tupperware",
+    "price": 220000,
+    "stock": 33
+  },
+  {
+    "id": 24,
+    "title": "Matras Yoga Anti Slip",
+    "code": "PRD024",
+    "category": "Olahraga",
+    "brand": "Reebok",
+    "price": 450000,
+    "stock": 11
+  },
+  {
+    "id": 25,
+    "title": "Helm Full Face Classic",
+    "code": "PRD025",
+    "category": "Otomotif",
+    "brand": "KYT",
+    "price": 850000,
+    "stock": 24
+  },
+  {
+    "id": 26,
+    "title": "Oli Mesin Synthetic 1L",
+    "code": "PRD026",
+    "category": "Otomotif",
+    "brand": "Shell",
+    "price": 175000,
+    "stock": 60
+  },
+  {
+    "id": 27,
+    "title": "Kopi Arabica Premium 250gr",
+    "code": "PRD027",
+    "category": "Makanan & Minuman",
+    "brand": "Kapal Api",
+    "price": 95000,
+    "stock": 45
+  },
+  {
+    "id": 28,
+    "title": "Teh Hijau Organik",
+    "code": "PRD028",
+    "category": "Makanan & Minuman",
+    "brand": "Tong Tji",
+    "price": 45000,
+    "stock": 38
+  },
+  {
+    "id": 29,
+    "title": "Parfum Eau De Toilette",
+    "code": "PRD029",
+    "category": "Kecantikan",
+    "brand": "Davidoff",
+    "price": 720000,
+    "stock": 7
+  },
+  {
+    "id": 30,
+    "title": "Skincare Facial Wash",
+    "code": "PRD030",
+    "category": "Kecantikan",
+    "brand": "Wardah",
+    "price": 55000,
+    "stock": 42
+  }
+]

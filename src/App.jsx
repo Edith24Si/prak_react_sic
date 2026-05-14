@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route, Routes } from "react-router-dom"
 import './assets/tailwind.css';
 import { Suspense } from 'react';
-import Loading from './components/loading';
+import Loading from './components/Loading';
 
 // import reactLogo from './assets/react.svg' enggak dipakai
 // import viteLogo from '/vite.svg' enggak dipakai
