@@ -28,9 +28,7 @@ export default function App() {
   const Forgot = React.lazy(() => import("./pages/auth/Forgot"))
 
 
-  const Error400 = React.lazy(() => import("./pages/Error400"))
-  const Error401 = React.lazy(() => import("./pages/Error401"))
-  const Error403 = React.lazy(() => import("./pages/Error403"))
+
   const NotFound = React.lazy(() => import("./pages/NotFound"))
 
 
