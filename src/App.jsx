@@ -23,9 +23,9 @@ export default function App() {
   const ProductDetail = React.lazy(() => import("./pages/ProductDetail"))
 
   const AuthLayout = React.lazy(() => import("./layouts/AuthLayout"))
-  const Login = React.lazy(() => import("./pages/Auth/Login"))
-  const Register = React.lazy(() => import("./pages/Auth/Register"))
-  const Forgot = React.lazy(() => import("./pages/Auth/Forgot"))
+  const Login = React.lazy(() => import("./pages/auth/Login"))
+  const Register = React.lazy(() => import("./pages/auth/Register"))
+  const Forgot = React.lazy(() => import("./pages/auth/Forgot"))
 
 
   const Error400 = React.lazy(() => import("./pages/Error400"))
