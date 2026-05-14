@@ -14,12 +14,10 @@ export default function Login() {
         const { name, value } = evt.target;
         setDataForm({ ...dataForm, [name]: value });
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
-
         axios
             .post("https://dummyjson.com/user/login", {
                 username: dataForm.email,
@@ -43,7 +41,6 @@ export default function Login() {
                 setLoading(false);
             });
     };
-
     return (
         <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
@@ -63,7 +60,6 @@ export default function Login() {
                     Mohon Tunggu...
                 </div>
             )}
-
             <form onSubmit={handleSubmit}>
                 <div className="mb-5">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>

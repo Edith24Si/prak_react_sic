@@ -1,124 +1,173 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import { customersData as initialData } from "../data/DataDummy";
+import customersData from "../data/customersData.json";
+import { Link } from "react-router-dom";
 
 export default function Customers() {
-    const [customers, setCustomers] = useState(initialData); // State untuk daftar customer
+    const [customers, setCustomers] = useState(customersData);
     const [showForm, setShowForm] = useState(false);
-    
-    // State untuk Input Form
     const [formData, setFormData] = useState({
+        id: customers.length + 1,
         name: "",
         email: "",
         phone: "",
-        loyalty: "Bronze"
+        loyalty: "Bronze",
     });
 
-    // Fungsi Tambah Customer
-    const handleSave = (e) => {
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleAddCustomer = (e) => {
         e.preventDefault();
-        if(!formData.name || !formData.email) return alert("Nama dan Email wajib diisi!");
+        if (formData.name && formData.email && formData.phone) {
+            setCustomers([...customers, { ...formData, id: customers.length + 1 }]);
+            setFormData({
+                id: customers.length + 2,
+                name: "",
+                email: "",
+                phone: "",
+                loyalty: "Bronze",
+            });
+            setShowForm(false);
+        }
+    };
 
-        const newCustomer = {
-            id: `CUST-${String(customers.length + 1).padStart(3, '0')}`,
-            ...formData
-        };
-
-        setCustomers([newCustomer, ...customers]); // Tambah ke paling atas
-        setShowForm(false); // Tutup form
-        setFormData({ name: "", email: "", phone: "", loyalty: "Bronze" }); // Reset form
+    const getLoyaltyBgColor = (loyalty) => {
+        switch (loyalty) {
+            case "Gold":
+                return "bg-amber-400";
+            case "Silver":
+                return "bg-gray-300";
+            case "Bronze":
+                return "bg-orange-600";
+            default:
+                return "bg-gray-300";
+        }
     };
 
     return (
-        <div className="flex flex-col gap-6 p-8 w-full">
-            <PageHeader title="Customers" breadcrumb={["Dashboard", "Customers"]}>
-                <button 
+        <div>
+            <PageHeader 
+                title="Customers" 
+                breadcrumb={["Dashboard", "Customers"]}
+            >
+                <button
                     onClick={() => setShowForm(!showForm)}
-                    className={`${showForm ? 'bg-red-500' : 'bg-hijau'} text-white px-6 py-2 rounded-xl transition-all shadow-md font-bold`}
+                    className="bg-emerald-500 text-white px-5 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition"
                 >
-                    {showForm ? "Cancel" : "+ Add Customer"}
+                    + Add Customer
                 </button>
             </PageHeader>
 
-            {/* FORM TAMBAH CUSTOMER */}
+            {/* Form Section */}
             {showForm && (
-                <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 animate-in fade-in zoom-in duration-300">
-                    <h2 className="text-xl font-bold text-gray-800 mb-6">Create New Profile</h2>
-                    <form onSubmit={handleSave} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-bold text-gray-600">Full Name</label>
-                            <input 
-                                type="text" 
-                                placeholder="e.g. Edith Helena"
-                                className="bg-gray-50 border-none p-3 rounded-xl outline-none focus:ring-2 focus:ring-hijau"
+                <div className="bg-slate-100 p-5 m-5 rounded-lg shadow-md">
+                    <h2 className="text-xl font-bold mb-5 text-slate-800">Add New Customer</h2>
+                    <form onSubmit={handleAddCustomer} className="grid grid-cols-2 gap-5">
+                        <div className="flex flex-col">
+                            <label className="mb-2 font-semibold text-slate-600 text-sm">Customer Name</label>
+                            <input
+                                type="text"
+                                name="name"
                                 value={formData.name}
-                                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                onChange={handleInputChange}
+                                placeholder="Enter customer name"
+                                className="px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                required
                             />
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-bold text-gray-600">Email Address</label>
-                            <input 
-                                type="email" 
-                                placeholder="example@mail.com"
-                                className="bg-gray-50 border-none p-3 rounded-xl outline-none focus:ring-2 focus:ring-hijau"
+
+                        <div className="flex flex-col">
+                            <label className="mb-2 font-semibold text-slate-600 text-sm">Email</label>
+                            <input
+                                type="email"
+                                name="email"
                                 value={formData.email}
-                                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                onChange={handleInputChange}
+                                placeholder="Enter email address"
+                                className="px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                required
                             />
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-bold text-gray-600">Phone Number</label>
-                            <input 
-                                type="text" 
-                                placeholder="0812..."
-                                className="bg-gray-50 border-none p-3 rounded-xl outline-none focus:ring-2 focus:ring-hijau"
+
+                        <div className="flex flex-col">
+                            <label className="mb-2 font-semibold text-slate-600 text-sm">Phone</label>
+                            <input
+                                type="text"
+                                name="phone"
                                 value={formData.phone}
-                                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                onChange={handleInputChange}
+                                placeholder="Enter phone number"
+                                className="px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                required
                             />
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm font-bold text-gray-600">Loyalty Level</label>
-                            <select 
-                                className="bg-gray-50 border-none p-3 rounded-xl outline-none focus:ring-2 focus:ring-hijau"
+
+                        <div className="flex flex-col">
+                            <label className="mb-2 font-semibold text-slate-600 text-sm">Loyalty</label>
+                            <select
+                                name="loyalty"
                                 value={formData.loyalty}
-                                onChange={(e) => setFormData({...formData, loyalty: e.target.value})}
+                                onChange={handleInputChange}
+                                className="px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
-                                <option value="Gold">Gold</option>
-                                <option value="Silver">Silver</option>
                                 <option value="Bronze">Bronze</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Gold">Gold</option>
                             </select>
                         </div>
-                        <button type="submit" className="md:col-span-2 bg-hijau text-white p-4 rounded-xl font-bold shadow-lg hover:scale-[1.02] transition-transform">
-                            Save Customer Profile
-                        </button>
+
+                        <div className="col-span-2 flex gap-3 justify-end">
+                            <button type="submit" className="bg-emerald-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-emerald-600 transition">
+                                Add Customer
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setShowForm(false)}
+                                className="bg-slate-200 text-slate-600 px-6 py-2 rounded-md font-semibold hover:bg-slate-300 transition"
+                            >
+                                Cancel
+                            </button>
+                        </div>
                     </form>
                 </div>
             )}
 
-            {/* LIST CUSTOMER (CARD GRID) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {customers.map((cust) => (
-                    <div key={cust.id} className="bg-white rounded-3xl p-6 flex flex-col items-center text-center shadow-sm border border-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all group">
-                        <div className="w-20 h-20 rounded-2xl mb-4 overflow-hidden bg-green-50 flex items-center justify-center border-4 border-white shadow-md">
-                            <img 
-                                src={`https://ui-avatars.com/api/?name=${cust.name}&background=00B074&color=fff&bold=true`} 
-                                alt={cust.name} 
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <h3 className="font-extrabold text-gray-800 text-lg group-hover:text-hijau transition-colors">{cust.name}</h3>
-                        <p className="text-gray-400 text-xs mb-4">{cust.email}</p>
-                        
-                        <div className="w-full pt-4 border-t border-gray-50 flex justify-between items-center mt-auto">
-                            <span className="text-[10px] font-bold text-gray-300 uppercase">{cust.id}</span>
-                            <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider
-                                ${cust.loyalty === 'Gold' ? 'bg-yellow-100 text-yellow-600' : 
-                                  cust.loyalty === 'Silver' ? 'bg-gray-100 text-gray-500' : 
-                                  'bg-orange-100 text-orange-600'}`}>
-                                {cust.loyalty}
-                            </span>
-                        </div>
-                    </div>
-                ))}
+            {/* Table Section */}
+            <div className="m-5 overflow-x-auto">
+                <table className="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead>
+                        <tr className="bg-slate-100 border-b-2 border-slate-200">
+                            <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Customer ID</th>
+                            <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Customer Name</th>
+                            <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Email</th>
+                            <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Phone</th>
+                            <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Loyalty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {customers.map((customer, index) => (
+                            <tr key={index} className="border-b border-slate-200 hover:bg-slate-50 transition">
+                                <td className="px-3 py-3 text-slate-800 text-sm">{customer.id}</td>
+                                 <Link to={`/Customers/${customer.id}`} className="text-emerald-400 hover:text-emerald-500">
+                                <td className="px-3 py-3 text-slate-800 text-sm">{customer.name}</td>
+                                </Link>
+                                <td className="px-3 py-3 text-slate-800 text-sm">{customer.email}</td>
+                                <td className="px-3 py-3 text-slate-800 text-sm">{customer.phone}</td>
+                                <td className="px-3 py-3 text-slate-800 text-sm">
+                                    <span className={`${getLoyaltyBgColor(customer.loyalty)} text-white text-xs font-semibold px-3 py-1 rounded-full inline-block`}>
+                                        {customer.loyalty}
+                                    </span>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
