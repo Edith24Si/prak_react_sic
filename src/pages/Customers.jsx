@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import customersData from "../data/customersData.json";
+import customersData from "../data/CustomersData.json";
 import { Link } from "react-router-dom";
 
 export default function Customers() {

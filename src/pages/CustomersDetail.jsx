@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import CustomerData from "../data/customersData.json"
+import CustomerData from "../data/CustomersData.json"
 
 export default function CustomerDetail() {
 
