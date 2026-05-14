@@ -16,7 +16,7 @@ export default function App() {
 
   const MainLayout = React.lazy(() => import("./layouts/MainLayout"))
   const Dashboard = React.lazy(() => import("./pages/Dashboard"))
-  const Orders = React.lazy(() => import("./pages/Orders"))
+  const Orders = React.lazy(() => import("./pages/Order"))
   const Customers = React.lazy(() => import("./pages/Customers"))
   const CustomersDetail = React.lazy(() => import("./pages/CustomersDetail"))
   const Products = React.lazy(() => import("./pages/Products"))
