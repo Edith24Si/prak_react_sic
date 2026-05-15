@@ -9,7 +9,9 @@ import Loading from "./components/Loading";
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Orders     = React.lazy(() => import("./pages/Orders"));
 const Customers  = React.lazy(() => import("./pages/Customers"));
+const CustomerDetail = React.lazy(() => import("./pages/CustomersDetail"));
 const NotFound   = React.lazy(() => import("./pages/NotFound"));
+const Error400 = NotFound; // Trik agar variabel Error400 tersedia jika dipanggil di mana-mana
 const Login      = React.lazy(() => import("./pages/auth/Login"));
 const Register   = React.lazy(() => import("./pages/auth/Register"));
 const Forgot     = React.lazy(() => import("./pages/auth/Forgot"));
@@ -18,12 +20,12 @@ function App() {
     return (
         <Suspense fallback={<Loading />}>
             <Routes>
-
                 {/* Halaman yang pakai Sidebar + Header */}
                 <Route element={<MainLayout />}>
                     <Route path="/"          element={<Dashboard />} />
                     <Route path="/orders"    element={<Orders />} />
                     <Route path="/customers" element={<Customers />} />
+                    <Route path="/customers/:id" element={<CustomerDetail />} />
                     <Route path="/error/400" element={<NotFound errorCode="400" errorTitle="Bad Request"  errorDescription="Server tidak dapat memahami permintaan Anda." />} />
                     <Route path="/error/401" element={<NotFound errorCode="401" errorTitle="Unauthorized" errorDescription="Anda harus login terlebih dahulu." />} />
                     <Route path="/error/403" element={<NotFound errorCode="403" errorTitle="Forbidden"    errorDescription="Anda tidak memiliki izin untuk mengakses fitur ini." />} />

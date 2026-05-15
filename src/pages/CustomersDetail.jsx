@@ -16,7 +16,6 @@ export default function CustomerDetail() {
 // id yang didapatkan dari customer, dia akan mencari ke data Json yang kita punya
 
     useEffect(() => {
-
         const findCustomer = CustomerData.find(
             (item) => item.id === parseInt(id)
         );
