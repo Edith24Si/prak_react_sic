@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import Loading from "./components/Loading";
+import Components from "./pages/Component";
 
 // Lazy load semua halaman
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/"          element={<Dashboard />} />
                     <Route path="/orders"    element={<Orders />} />
                     <Route path="/customers" element={<Customers />} />
+                     <Route path="/Components" element={<Components />} />
                     <Route path="/customers/:id" element={<CustomerDetail />} />
                     <Route path="/error/400" element={<NotFound errorCode="400" errorTitle="Bad Request"  errorDescription="Server tidak dapat memahami permintaan Anda." />} />
                     <Route path="/error/401" element={<NotFound errorCode="401" errorTitle="Unauthorized" errorDescription="Anda harus login terlebih dahulu." />} />

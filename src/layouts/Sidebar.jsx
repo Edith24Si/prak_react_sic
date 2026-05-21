@@ -6,6 +6,7 @@ export default function Sidebar() {
         { id: "Dashboard", icon: LuLayoutDashboard, label: "Dashboard", to: "/" },
         { id: "Orders", icon: LuListOrdered, label: "Orders", to: "/orders" },
         { id: "Customers", icon: LuUsers, label: "Customers", to: "/customers" },
+        { id: "Components", icon: LuUsers, label: "Components", to: "/components" },
     ];
 
     // Menu khusus untuk simulasi error (Tugas Poin 4)
