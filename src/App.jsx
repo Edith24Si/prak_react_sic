@@ -14,6 +14,7 @@ const CustomerDetail = React.lazy(() => import("./pages/CustomersDetail"));
 const NotFound   = React.lazy(() => import("./pages/NotFound"));
 const Error400 = NotFound; // Trik agar variabel Error400 tersedia jika dipanggil di mana-mana
 const Login      = React.lazy(() => import("./pages/auth/Login"));
+const FiturXyz = React.lazy(() => import("./pages/FiturXyz"));
 const Register   = React.lazy(() => import("./pages/auth/Register"));
 const Forgot     = React.lazy(() => import("./pages/auth/Forgot"));
 
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/orders"    element={<Orders />} />
                     <Route path="/customers" element={<Customers />} />
                      <Route path="/Components" element={<Components />} />
+                        <Route path="/fiturxyz" element={<FiturXyz />} />
                     <Route path="/customers/:id" element={<CustomerDetail />} />
                     <Route path="/error/400" element={<NotFound errorCode="400" errorTitle="Bad Request"  errorDescription="Server tidak dapat memahami permintaan Anda." />} />
                     <Route path="/error/401" element={<NotFound errorCode="401" errorTitle="Unauthorized" errorDescription="Anda harus login terlebih dahulu." />} />
