@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PageHeader from "../components/PageHeader";
 import { ordersData as initialData } from "../data/DataDummy";
+import { calculatePointsFromOrder } from "../lib/loyalty";
 
 export default function Orders() {
     // State untuk menyimpan daftar order
@@ -17,25 +18,22 @@ export default function Orders() {
 
     // Fungsi untuk menyimpan order baru
     const handleSave = (e) => {
-        e.preventDefault(); // Mencegah halaman refresh saat tombol ditekan
-        
+        e.preventDefault();
+
         if (!formData.customerName || !formData.totalPrice) {
             return alert("Nama Customer dan Total Harga wajib diisi!");
         }
 
-        // Membuat objek order baru
         const newOrder = {
             orderId: `ORD-${String(orders.length + 1).padStart(3, '0')}`,
             customerName: formData.customerName,
             totalPrice: parseInt(formData.totalPrice) || 0,
-            orderDate: formData.orderDate || new Date().toISOString().split('T')[0], // Jika kosong, pakai tanggal hari ini
+            orderDate: formData.orderDate || new Date().toISOString().split('T')[0],
             status: formData.status
         };
 
-        // Memasukkan order baru ke paling atas daftar
         setOrders([newOrder, ...orders]);
-        
-        // Menutup form dan mereset isiannya
+
         setShowForm(false);
         setFormData({ customerName: "", totalPrice: "", orderDate: "", status: "Pending" });
     };
@@ -51,7 +49,6 @@ export default function Orders() {
                 </button>
             </PageHeader>
 
-            {/* FORM ADD ORDER */}
             {showForm && (
                 <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 animate-in fade-in zoom-in duration-300">
                     <h2 className="text-xl font-bold text-gray-800 mb-6">Create New Order</h2>
@@ -104,7 +101,6 @@ export default function Orders() {
                 </div>
             )}
 
-            {/* TABLE ORDERS */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full whitespace-nowrap">
@@ -115,10 +111,10 @@ export default function Orders() {
                                 <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
                                 <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Total Price</th>
                                 <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
+                                <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Points</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
-                            {/* Memanggil data dari state 'orders', bukan dari data dummy statis */}
                             {orders.map((order) => (
                                 <tr key={order.orderId} className="hover:bg-gray-50 transition-colors">
                                     <td className="px-6 py-4 text-sm font-bold text-gray-700">{order.orderId}</td>
@@ -133,6 +129,11 @@ export default function Orders() {
                                     </td>
                                     <td className="px-6 py-4 text-sm font-bold text-gray-600">Rp {order.totalPrice.toLocaleString('id-ID')}</td>
                                     <td className="px-6 py-4 text-sm text-gray-500">{order.orderDate}</td>
+                                    <td className="px-6 py-4 text-sm font-semibold text-emerald-600">
+                                        {order.status === "Completed"
+                                            ? `+${calculatePointsFromOrder(order.totalPrice)}`
+                                            : "-"}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

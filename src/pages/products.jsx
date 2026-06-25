@@ -9,11 +9,9 @@ export default function Products() {
             currency: "IDR",
         }).format(price);
     };
-
     return (
         <div className="min-h-screen bg-gray-100 p-8">
             <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-
                 {/* HEADER */}
                 <div className="px-8 py-6 border-b border-gray-200 bg-gradient-to-r from-indigo-600 to-purple-600">
                     <h1 className="text-3xl font-bold text-white">
@@ -23,7 +21,6 @@ export default function Products() {
                         List semua produk yang tersedia
                     </p>
                 </div>
-
                 {/* TABLE */}
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left">
@@ -38,7 +35,6 @@ export default function Products() {
                                 <th className="px-6 py-4 text-center">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             {ProductData.map((item, index) => (
                                 <tr
@@ -55,12 +51,11 @@ export default function Products() {
                                     <td className="px-6 py-4 font-semibold text-gray-700">
                                         {item.code}
                                     </td>
-
                                     {/* TITLE */}
                                     <td className="px-6 py-4">
                                         <div>
                                             <Link to={`/products/${item.id
-                                                
+                                            
                                             }`} className="text-emerald-400 hover:text-emerald-500">
                                                 <h2 className="font-bold text-gray-900">
                                                     {item.title}
@@ -71,7 +66,6 @@ export default function Products() {
                                             </p>
                                         </div>
                                     </td>
-
                                     {/* CATEGORY */}
                                     <td className="px-6 py-4">
                                         <span className="
@@ -85,17 +79,14 @@ export default function Products() {
                                             {item.category}
                                         </span>
                                     </td>
-
                                     {/* BRAND */}
                                     <td className="px-6 py-4 text-gray-700 font-medium">
                                         {item.brand}
                                     </td>
-
                                     {/* PRICE */}
                                     <td className="px-6 py-4 font-bold text-green-600">
                                         {formatPrice(item.price)}
                                     </td>
-
                                     {/* STOCK */}
                                     <td className="px-6 py-4">
                                         <span

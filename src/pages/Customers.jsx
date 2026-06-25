@@ -2,16 +2,33 @@ import { useState } from "react";
 import PageHeader from "../components/PageHeader";
 import customersData from "../data/CustomersData.json";
 import { Link } from "react-router-dom";
+import { ordersData } from "../data/DataDummy";
+import { getLevelFromPoints, calculatePointsFromOrder } from "../lib/loyalty";
 
 export default function Customers() {
+    // Fungsi menghitung total poin seorang customer dari order Completed miliknya
+    const getCustomerPoints = (customerName) => {
+        const customerOrders = ordersData.filter(
+            (order) => order.customerName === customerName && order.status === "Completed"
+        );
+        return customerOrders.reduce(
+            (total, order) => total + calculatePointsFromOrder(order.totalPrice),
+            0
+        );
+    };
     const [customers, setCustomers] = useState(customersData);
+    // Menambahkan poin dan level otomatis ke setiap customer
+    const customersWithLoyalty = customers.map((customer) => {
+        const points = getCustomerPoints(customer.name);
+        const level = getLevelFromPoints(points);
+        return { ...customer, points, loyalty: level };
+    });
     const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
         id: customers.length + 1,
         name: "",
         email: "",
         phone: "",
-        loyalty: "Bronze",
     });
 
     const handleInputChange = (e) => {
@@ -31,7 +48,6 @@ export default function Customers() {
                 name: "",
                 email: "",
                 phone: "",
-                loyalty: "Bronze",
             });
             setShowForm(false);
         }
@@ -39,6 +55,8 @@ export default function Customers() {
 
     const getLoyaltyBgColor = (loyalty) => {
         switch (loyalty) {
+            case "Platinum":
+                return "bg-slate-700";
             case "Gold":
                 return "bg-amber-400";
             case "Silver":
@@ -52,8 +70,8 @@ export default function Customers() {
 
     return (
         <div>
-            <PageHeader 
-                title="Customers" 
+            <PageHeader
+                title="Customers"
                 breadcrumb={["Dashboard", "Customers"]}
             >
                 <button
@@ -108,20 +126,7 @@ export default function Customers() {
                             />
                         </div>
 
-                        <div className="flex flex-col">
-                            <label className="mb-2 font-semibold text-slate-600 text-sm">Loyalty</label>
-                            <select
-                                name="loyalty"
-                                value={formData.loyalty}
-                                onChange={handleInputChange}
-                                className="px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                            >
-                                <option value="Bronze">Bronze</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Gold">Gold</option>
-                            </select>
-                        </div>
-
+                
                         <div className="col-span-2 flex gap-3 justify-end">
                             <button type="submit" className="bg-emerald-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-emerald-600 transition">
                                 Add Customer
@@ -148,14 +153,15 @@ export default function Customers() {
                             <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Email</th>
                             <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Phone</th>
                             <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Loyalty</th>
+                            <th className="px-3 py-3 text-left font-semibold text-slate-600 text-sm">Points</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {customers.map((customer, index) => (
+                        {customersWithLoyalty.map((customer, index) => (
                             <tr key={index} className="border-b border-slate-200 hover:bg-slate-50 transition">
                                 <td className="px-3 py-3 text-slate-800 text-sm">{customer.id}</td>
-                                 <Link to={`/Customers/${customer.id}`} className="text-emerald-400 hover:text-emerald-500">
-                                <td className="px-3 py-3 text-slate-800 text-sm">{customer.name}</td>
+                                <Link to={`/Customers/${customer.id}`} className="text-emerald-400 hover:text-emerald-500">
+                                    <td className="px-3 py-3 text-slate-800 text-sm">{customer.name}</td>
                                 </Link>
                                 <td className="px-3 py-3 text-slate-800 text-sm">{customer.email}</td>
                                 <td className="px-3 py-3 text-slate-800 text-sm">{customer.phone}</td>
@@ -164,6 +170,7 @@ export default function Customers() {
                                         {customer.loyalty}
                                     </span>
                                 </td>
+                                <td className="px-3 py-3 text-slate-800 text-sm font-semibold">{customer.points}</td>
                             </tr>
                         ))}
                     </tbody>
