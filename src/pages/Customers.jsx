@@ -16,16 +16,20 @@ export default function Customers() {
             0
         );
     };
+
     const [customers, setCustomers] = useState(customersData);
+
     // Menambahkan poin dan level otomatis ke setiap customer
     const customersWithLoyalty = customers.map((customer) => {
         const points = getCustomerPoints(customer.name);
         const level = getLevelFromPoints(points);
         return { ...customer, points, loyalty: level };
     });
+
     const [showForm, setShowForm] = useState(false);
+    
+    // State form input (Bersih tanpa melacak field loyalty)
     const [formData, setFormData] = useState({
-        id: customers.length + 1,
         name: "",
         email: "",
         phone: "",
@@ -42,9 +46,11 @@ export default function Customers() {
     const handleAddCustomer = (e) => {
         e.preventDefault();
         if (formData.name && formData.email && formData.phone) {
-            setCustomers([...customers, { ...formData, id: customers.length + 1 }]);
+            // Ambil ID berikutnya secara aman dari data terkini
+            const nextId = customers.length > 0 ? Math.max(...customers.map(c => c.id)) + 1 : 1;
+            
+            setCustomers([...customers, { ...formData, id: nextId }]);
             setFormData({
-                id: customers.length + 2,
                 name: "",
                 email: "",
                 phone: "",
@@ -78,7 +84,7 @@ export default function Customers() {
                     onClick={() => setShowForm(!showForm)}
                     className="bg-emerald-500 text-white px-5 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition"
                 >
-                    + Add Customer
+                    {showForm ? "Cancel" : "+ Add Customer"}
                 </button>
             </PageHeader>
 
@@ -126,7 +132,6 @@ export default function Customers() {
                             />
                         </div>
 
-                
                         <div className="col-span-2 flex gap-3 justify-end">
                             <button type="submit" className="bg-emerald-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-emerald-600 transition">
                                 Add Customer
